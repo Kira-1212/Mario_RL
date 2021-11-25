@@ -150,7 +150,7 @@ class Mario:
 
 
     def save(self):
-        save_path = self.save_dir / f"mario_net_{int(self.curr_step // self.save_every)}.chkpt"
+        save_path = self.save_dir / f"mario.chkpt"
         torch.save(
             dict(
                 model=self.net.state_dict(),

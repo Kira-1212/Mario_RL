@@ -34,15 +34,15 @@ env = FrameStack(env, num_stack=4)
 
 env.reset()
 
-save_dir = Path('checkpoints') / datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
+save_dir = Path('checkpoints_train') / datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
 save_dir.mkdir(parents=True)
 
-checkpoint = None # Path('checkpoints/2020-10-21T18-25-27/mario.chkpt')
+checkpoint = Path('checkpoints_train/2021-11-24T10-57-00/mario.chkpt')
 mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n, save_dir=save_dir, checkpoint=checkpoint)
 
 logger = MetricLogger(save_dir)
-
-episodes = 1001
+python ma
+episodes = 21
 
 ### for Loop that train the model num_episodes times by playing the game
 for e in range(episodes):
