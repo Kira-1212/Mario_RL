@@ -1,4 +1,5 @@
-import random, datetime
+import random
+import datetime
 from pathlib import Path
 
 import gym
@@ -9,12 +10,12 @@ from nes_py.wrappers import JoypadSpace
 from metrics import MetricLogger
 from agent import Mario
 from wrappers import ResizeObservation, SkipFrame
-from gym_super_mario_bros.actions import RIGHT_ONLY 
+from gym_super_mario_bros.actions import RIGHT_ONLY
 env = gym_super_mario_bros.make('SuperMarioBros-1-1-v0')
 
 env = JoypadSpace(
     env,
-    RIGHT_ONLY 
+    RIGHT_ONLY
 )
 
 env = SkipFrame(env, skip=4)
@@ -25,16 +26,19 @@ env = FrameStack(env, num_stack=4)
 
 env.reset()
 
-save_dir = Path('checkpoints_play') / datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
+save_dir = Path('checkpoints_play') / \
+    datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
 save_dir.mkdir(parents=True)
 
-checkpoint = Path('checkpoints_train/2021-11-27T11-29-49/mario.chkpt') # this will change
-mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n, save_dir=save_dir, checkpoint=checkpoint)
+# this will change
+checkpoint = Path('checkpoints_train/2021-11-29T20-51-36/mario.chkpt')
+mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n,
+              save_dir=save_dir, checkpoint=checkpoint)
 mario.exploration_rate = mario.exploration_rate_min
 
 logger = MetricLogger(save_dir)
 
-episodes = 5
+episodes = 11
 
 for e in range(episodes):
 
