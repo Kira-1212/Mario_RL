@@ -38,7 +38,7 @@ mario.exploration_rate = mario.exploration_rate_min
 
 logger = MetricLogger(save_dir)
 
-episodes = 11
+episodes = 5
 
 for e in range(episodes):
 
